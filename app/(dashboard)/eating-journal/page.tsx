@@ -2,6 +2,7 @@ import EntryCard from "@/components/EntryCard"
 import NewEntryCard from "@/components/NewEntryCard"
 import { getUserByClerkId } from "@/utils/auth"
 import { prisma } from "@/utils/db"
+import Link from "next/link"
 
 const getEntries = async () => {
   const user = await getUserByClerkId()
@@ -19,7 +20,6 @@ const getEntries = async () => {
 
 const EatingJournalPage = async () => {
   const entries = await getEntries()
-  console.log('!!entries', entries)
 
   return (
     <div className="p-10 bg-zinc-400/10 h-full">  
@@ -28,7 +28,9 @@ const EatingJournalPage = async () => {
         <NewEntryCard />
 
         {entries && entries.map((entry: any) => (
-          <EntryCard key={entry.ud} entry={entry} />
+          <Link href={`/eating-journal/${entry.id}`} key={entry.id}>
+            <EntryCard entry={entry} />
+          </Link>
         ))}
       </div>
     </div>

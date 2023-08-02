@@ -38,7 +38,7 @@ model JournalEntry {
   analysis Analysis?
 
   //Index to create the foreign key for the relation to User
-  @@index([userId])
+  @@unique([userId, id])
 }
 
 model Analysis {
